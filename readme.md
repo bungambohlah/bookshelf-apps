@@ -26,7 +26,7 @@ Coming soon...
 - Bookshelf Apps harus mampu menambahkan data buku baru.
 - Data buku yang disimpan merupakan objek JavaScript dengan struktur berikut:
 
-```json
+```javascript
 {
   id: string | number,
   title: string,
@@ -38,7 +38,7 @@ Coming soon...
 
 Berikut contoh data riilnya:
 
-```json
+```javascript
 {
   id: 3657848524,
   title: 'Harry Potter and the Philosopher\'s Stone',
