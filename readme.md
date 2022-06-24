@@ -10,6 +10,8 @@ Project ini adalah Submission dari Aplikasi Pengelolaan Data Menggunakan DOM dan
     - [Screenshots](#screenshots)
     - [Features](#features)
     - [Link](#link)
+  - [Developed By](#developed-by)
+  - [Thanks to](#thanks-to)
 
 ## Overview
 
@@ -74,3 +76,13 @@ Untuk id buku pada tiap buku yang disimpan haruslah unik. Tips dalam menetapkan 
 ### Link
 
 Coming soon...
+
+## Developed By
+
+Developed by me (Afif Abdillah Jusuf), visit my web at [afif.dev](https://afif.dev) for more contact information
+
+## Thanks to
+
+Dicoding. ([dicoding.com](https://dicoding.com))
+
+Jadilah developer expert menggunakan kurikulum standar internasional dari principal technology owner seperti Google, Microsoft, AWS, IBM, dan LINE.
