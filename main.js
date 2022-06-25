@@ -98,7 +98,7 @@ function setIncompleteHtml(bookIncomplete = []) {
       throw new Error("data harus bernilai array");
 
     let bookIncompleteHtml = ``;
-    const html = `<article class="block w-1/2 p-4 rounded-lg shadow-xl max-w-sm bg-slate-100">
+    const html = `<article class="w-1/2 p-4 rounded-lg shadow-xl bg-slate-100">
             <h3 class="text-gray-900 text-xl leading-tight font-medium mb-4">$title</h3>
             <div class="flex space-x-4">
               <p class="w-1/2 text-gray-700 text-base">Oleh: $author</p>
@@ -133,7 +133,11 @@ function setIncompleteHtml(bookIncomplete = []) {
         .replaceAll("$id", id);
     });
 
-    return bookIncompleteHtml.join();
+    bookIncompleteHtml = bookIncompleteHtml.join();
+    if (!bookIncompleteHtml.length)
+      bookIncompleteHtml = `<h3 class="text-rose-700 text-sm leading-tight italic">Tidak ada buku yang belum selesai dibaca</h3>`;
+
+    return bookIncompleteHtml;
   } catch (error) {
     console.error(error.message);
   }
@@ -145,7 +149,7 @@ function setCompleteHtml(bookComplete = []) {
       throw new Error("data harus bernilai array");
 
     let bookCompleteHtml = ``;
-    const html = `<article class="block w-1/2 p-4 rounded-lg shadow-xl max-w-sm bg-slate-100">
+    const html = `<article class="w-1/2 p-4 rounded-lg shadow-xl bg-slate-100">
           <h3 class="text-gray-900 text-xl leading-tight font-medium mb-4">$title</h3>
           <div class="flex space-x-4">
             <p class="w-1/2 text-gray-700 text-base">Oleh: $author</p>
@@ -182,7 +186,11 @@ function setCompleteHtml(bookComplete = []) {
         .replaceAll("$id", id);
     });
 
-    return bookCompleteHtml.join();
+    bookCompleteHtml = bookCompleteHtml.join();
+    if (!bookCompleteHtml.length)
+      bookCompleteHtml = `<h3 class="text-rose-700 text-sm leading-tight italic">Tidak ada buku yang selesai dibaca</h3>`;
+
+    return bookCompleteHtml;
   } catch (error) {
     console.error(error.message);
   }
