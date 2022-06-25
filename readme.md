@@ -1,6 +1,7 @@
 # Dicoding - Aplikasi Pengelolaan Data Menggunakan DOM dan Web Storage
 
 Project ini adalah Submission dari Aplikasi Pengelolaan Data Menggunakan DOM dan Web Storage.
+Link Dicoding: [disini](https://www.dicoding.com/academies/315)
 
 ## Table of contents
 
@@ -9,6 +10,7 @@ Project ini adalah Submission dari Aplikasi Pengelolaan Data Menggunakan DOM dan
   - [Overview](#overview)
     - [Screenshots](#screenshots)
     - [Features](#features)
+    - [Stack Technology Used](#stack-technology-used)
     - [Link](#link)
   - [Developed By](#developed-by)
   - [Thanks to](#thanks-to)
@@ -72,6 +74,13 @@ Untuk id buku pada tiap buku yang disimpan haruslah unik. Tips dalam menetapkan 
 
 - Data buku yang ditampilkan pada rak, baik itu "Belum selesai dibaca" maupun "Selesai dibaca" harus dapat bertahan walaupun halaman web ditutup.
 - Dengan begitu, Anda harus menyimpan data buku pada localStorage.
+
+### Stack Technology Used
+
+- HTML
+- CSS
+- Tailwind CSS
+- Javascript
 
 ### Link
 
