@@ -28,7 +28,7 @@ Untuk bisa lulus dan mendapatkan sertifikat dari akademi ini, Anda harus mengerj
 ### Screenshots
 
 <img src="screenshots/desktop.png">
-<img src="screenshot/tablet.png" width=256>
+<img src="screenshots/tablet.png" width=256>
 
 ### Features
 
