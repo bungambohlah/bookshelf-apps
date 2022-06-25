@@ -1,3 +1,4 @@
+// this function is used while document / window (DOM) is ready to use
 function docReady(fn) {
   // see if DOM is already available
   if (
@@ -11,8 +12,10 @@ function docReady(fn) {
   }
 }
 
+// define key as localStorage's key
 const key = "books";
 
+// this function is used to validate params or books
 function validate(value, type) {
   if (type === "id") {
     const valid = new Date(value).getTime() > 0;
@@ -22,6 +25,7 @@ function validate(value, type) {
   return true;
 }
 
+// this function is used to get list of books from localStorage
 function parseStorage() {
   let books = [];
   try {
@@ -33,6 +37,7 @@ function parseStorage() {
 
   return books;
 }
+// this function is used to add new item on current list of books and set to localStorage
 function stringifyStorage(v) {
   try {
     if (typeof v !== "object")
@@ -46,6 +51,7 @@ function stringifyStorage(v) {
     return error.message;
   }
 }
+// this function is used to set (re-create) list of books as array and full set to localStorage
 function stringifyStorageArray(v) {
   try {
     if (!Array.isArray(v)) throw new Error("data stringify harus berupa array");
@@ -56,6 +62,7 @@ function stringifyStorageArray(v) {
   }
 }
 
+// add function to handle add book and add submit event listener to inputBook form
 const inputBook = document.getElementById("inputBook");
 function addBook(event) {
   event.preventDefault();
@@ -66,7 +73,6 @@ function addBook(event) {
 
   if (!data.inputBookIsComplete) data.inputBookIsComplete = false;
   else if (data.inputBookIsComplete) data.inputBookIsComplete = true;
-  console.log(data);
 
   stringifyStorage(data);
   getBooks();
@@ -76,6 +82,7 @@ function addBook(event) {
 }
 inputBook.addEventListener("submit", addBook);
 
+// this function is handle to get books and render it to two specified list of books (complete & incomplete's lists)
 function getBooks(search) {
   let books = parseStorage();
 
@@ -109,6 +116,7 @@ function getBooks(search) {
   return true;
 }
 
+// this function is used to render incomplete books list
 function setIncompleteHtml(bookIncomplete = []) {
   try {
     if (!Array.isArray(bookIncomplete))
@@ -160,6 +168,7 @@ function setIncompleteHtml(bookIncomplete = []) {
   }
 }
 
+// this function is used to render complete books list
 function setCompleteHtml(bookComplete = []) {
   try {
     if (!Array.isArray(bookComplete))
@@ -213,6 +222,7 @@ function setCompleteHtml(bookComplete = []) {
   }
 }
 
+// this function is used to handle remove book from localStorage and re-render it
 function removeBook(id) {
   try {
     validate(id, "id");
@@ -234,6 +244,7 @@ function removeBook(id) {
   }
 }
 
+// this function is used to move unread book list to readed book list and re-render it
 function readedBook(id) {
   try {
     validate(id, "id");
@@ -256,6 +267,7 @@ function readedBook(id) {
   }
 }
 
+// this function is used to move readed book list to unread book list and re-render it
 function revertBook(id) {
   try {
     validate(id, "id");
@@ -278,6 +290,7 @@ function revertBook(id) {
   }
 }
 
+// add function to handle search book and add submit event listener to searchBook form
 const searchBook = document.getElementById("searchBook");
 function findBook(event) {
   event.preventDefault();
@@ -289,6 +302,7 @@ function findBook(event) {
 }
 searchBook.addEventListener("submit", findBook);
 
+// call document / windows function
 docReady(function () {
   // DOM is loaded and ready for manipulation here
   getBooks();
