@@ -76,8 +76,16 @@ function addBook(event) {
 }
 inputBook.addEventListener("submit", addBook);
 
-function getBooks() {
-  const books = parseStorage();
+function getBooks(search) {
+  let books = parseStorage();
+
+  if (typeof search === "string") {
+    books = books.filter((x) => {
+      const newSearch = search.toUpperCase();
+      const title = `${x.inputBookTitle} (${x.inputBookYear})`;
+      return title.toUpperCase().indexOf(newSearch) >= 0;
+    });
+  }
 
   const bookIncomplete = books.filter((x) => !x.inputBookIsComplete);
   const bookComplete = books.filter((x) => x.inputBookIsComplete);
@@ -269,6 +277,17 @@ function revertBook(id) {
     return error.message;
   }
 }
+
+const searchBook = document.getElementById("searchBook");
+function findBook(event) {
+  event.preventDefault();
+  const { searchBookTitle } = Object.fromEntries(
+    new FormData(event.target).entries()
+  );
+
+  getBooks(searchBookTitle);
+}
+searchBook.addEventListener("submit", findBook);
 
 docReady(function () {
   // DOM is loaded and ready for manipulation here
