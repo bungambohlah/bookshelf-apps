@@ -13,6 +13,15 @@ function docReady(fn) {
 
 const key = "books";
 
+function validate(value, type) {
+  if (type === "id") {
+    const valid = new Date(value).getTime() > 0;
+    if (!valid) throw new Error("masukkan data id (timestamp) dengan benar");
+  }
+
+  return true;
+}
+
 function parseStorage() {
   let books = [];
   try {
@@ -197,10 +206,8 @@ function setCompleteHtml(bookComplete = []) {
 }
 
 function removeBook(id) {
-  const valid = new Date(id).getTime() > 0;
-
   try {
-    if (!valid) throw new Error("masukkan data id (timestamp) dengan benar");
+    validate(id, "id");
 
     let books = parseStorage();
     const currentBook = books.filter((x) => x.id === id).shift();
@@ -223,6 +230,3 @@ docReady(function () {
   // DOM is loaded and ready for manipulation here
   getBooks();
 });
-
-// TODO: add readed, revert book
-// TODO: add functionality of search (filter) book by title
