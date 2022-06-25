@@ -226,6 +226,28 @@ function removeBook(id) {
   }
 }
 
+function readedBook(id) {
+  try {
+    validate(id, "id");
+
+    let books = parseStorage();
+    const indexBook = books.findIndex((x) => x.id === id);
+    if (indexBook < 0) window.alert(`Buku dengan id ${id} tidak ditemukan`);
+    if (indexBook >= 0) {
+      const currentBook = books[indexBook];
+      const title = `${currentBook.inputBookTitle} (${currentBook.inputBookYear})`;
+      if (window.confirm(`Apakah anda selesai membaca ${title} ?`)) {
+        books[indexBook].inputBookIsComplete = true;
+        stringifyStorageArray(books);
+      }
+    }
+
+    getBooks();
+  } catch (error) {
+    return error.message;
+  }
+}
+
 docReady(function () {
   // DOM is loaded and ready for manipulation here
   getBooks();
