@@ -91,7 +91,7 @@ Untuk id buku pada tiap buku yang disimpan haruslah unik. Tips dalam menetapkan 
 
 ### Link
 
-  Coming soon...
+visit at ([bookshelf.afif.dev](https://bookshelf.afif.dev/))
 
 ## Developed By
 
