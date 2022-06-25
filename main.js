@@ -37,6 +37,15 @@ function stringifyStorage(v) {
     return error.message;
   }
 }
+function stringifyStorageArray(v) {
+  try {
+    if (!Array.isArray(v)) throw new Error("data stringify harus berupa array");
+
+    window.localStorage.setItem(key, JSON.stringify(v));
+  } catch (error) {
+    return error.message;
+  }
+}
 
 const inputBook = document.getElementById("inputBook");
 function addBook(event) {
@@ -179,10 +188,33 @@ function setCompleteHtml(bookComplete = []) {
   }
 }
 
+function removeBook(id) {
+  const valid = new Date(id).getTime() > 0;
+
+  try {
+    if (!valid) throw new Error("masukkan data id (timestamp) dengan benar");
+
+    let books = parseStorage();
+    const currentBook = books.filter((x) => x.id === id).shift();
+    if (!currentBook) window.alert(`Buku dengan id ${id} tidak ditemukan`);
+    if (currentBook) {
+      const title = `${currentBook.inputBookTitle} (${currentBook.inputBookYear})`;
+      if (window.confirm(`Apakah anda yakin untuk hapus ${title} ?`)) {
+        books = books.filter((x) => x.id !== id);
+        stringifyStorageArray(books);
+      }
+    }
+
+    getBooks();
+  } catch (error) {
+    return error.message;
+  }
+}
+
 docReady(function () {
   // DOM is loaded and ready for manipulation here
   getBooks();
 });
 
-// TODO: add remove, readed, revert book
+// TODO: add readed, revert book
 // TODO: add functionality of search (filter) book by title
