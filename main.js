@@ -77,7 +77,12 @@ function addBook(event) {
   stringifyStorage(data);
   getBooks();
 
-  alert(`Telah berhasil ditambahkan.`);
+  Swal.fire({
+    icon: "success",
+    title: "Telah berhasil ditambahkan.",
+    showConfirmButton: false,
+    timer: 1500,
+  });
   event.target.reset();
 }
 inputBook.addEventListener("submit", addBook);
@@ -229,16 +234,38 @@ function removeBook(id) {
 
     let books = parseStorage();
     const currentBook = books.filter((x) => x.id === id).shift();
-    if (!currentBook) window.alert(`Buku dengan id ${id} tidak ditemukan`);
+    if (!currentBook) {
+      Swal.fire({
+        icon: "error",
+        title: `Buku tidak ditemukan.`,
+        showConfirmButton: true,
+        footer: `Buku dengan id: <em>${id}</em>`,
+      });
+    }
     if (currentBook) {
       const title = `${currentBook.inputBookTitle} (${currentBook.inputBookYear})`;
-      if (window.confirm(`Apakah anda yakin untuk hapus ${title} ?`)) {
-        books = books.filter((x) => x.id !== id);
-        stringifyStorageArray(books);
-      }
-    }
+      Swal.fire({
+        title: `Hapus buku ${title} ?`,
+        text: `Apakah anda yakin untuk hapus buku ${title} ?`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Iya, hapus buku ini!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          books = books.filter((x) => x.id !== id);
+          stringifyStorageArray(books);
+          getBooks();
 
-    getBooks();
+          Swal.fire(
+            `Buku ${title} telah dihapus!`,
+            "Buku telah berhasil dihapus.",
+            "success"
+          );
+        }
+      });
+    }
   } catch (error) {
     return error.message;
   }
@@ -251,17 +278,39 @@ function readedBook(id) {
 
     let books = parseStorage();
     const indexBook = books.findIndex((x) => x.id === id);
-    if (indexBook < 0) window.alert(`Buku dengan id ${id} tidak ditemukan`);
+    if (indexBook < 0) {
+      Swal.fire({
+        icon: "error",
+        title: `Buku tidak ditemukan.`,
+        showConfirmButton: true,
+        footer: `Buku dengan id: <em>${id}</em>`,
+      });
+    }
     if (indexBook >= 0) {
       const currentBook = books[indexBook];
       const title = `${currentBook.inputBookTitle} (${currentBook.inputBookYear})`;
-      if (window.confirm(`Apakah anda selesai membaca ${title} ?`)) {
-        books[indexBook].inputBookIsComplete = true;
-        stringifyStorageArray(books);
-      }
-    }
+      Swal.fire({
+        title: `Selesai membaca buku ${title} ?`,
+        text: `Apakah anda yakin pindah buku ${title} ke rak selesai dibaca ?`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Iya, selesai!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          books[indexBook].inputBookIsComplete = true;
+          stringifyStorageArray(books);
+          getBooks();
 
-    getBooks();
+          Swal.fire(
+            `Buku ${title} telah dipindah!`,
+            "Buku telah berhasil dipindah ke rak selesai dibaca.",
+            "success"
+          );
+        }
+      });
+    }
   } catch (error) {
     return error.message;
   }
@@ -274,17 +323,39 @@ function revertBook(id) {
 
     let books = parseStorage();
     const indexBook = books.findIndex((x) => x.id === id);
-    if (indexBook < 0) window.alert(`Buku dengan id ${id} tidak ditemukan`);
+    if (indexBook < 0) {
+      Swal.fire({
+        icon: "error",
+        title: `Buku tidak ditemukan.`,
+        showConfirmButton: true,
+        footer: `Buku dengan id: <em>${id}</em>`,
+      });
+    }
     if (indexBook >= 0) {
       const currentBook = books[indexBook];
       const title = `${currentBook.inputBookTitle} (${currentBook.inputBookYear})`;
-      if (window.confirm(`Apakah anda belum selesai membaca ${title} ?`)) {
-        books[indexBook].inputBookIsComplete = false;
-        stringifyStorageArray(books);
-      }
-    }
+      Swal.fire({
+        title: `Belum Selesai membaca buku ${title} ?`,
+        text: `Apakah anda yakin pindah buku ${title} ke rak belum selesai dibaca ?`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Iya, belum selesai!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          books[indexBook].inputBookIsComplete = false;
+          stringifyStorageArray(books);
+          getBooks();
 
-    getBooks();
+          Swal.fire(
+            `Buku ${title} telah dipindah!`,
+            "Buku telah berhasil dipindah ke rak belum selesai dibaca.",
+            "success"
+          );
+        }
+      });
+    }
   } catch (error) {
     return error.message;
   }
